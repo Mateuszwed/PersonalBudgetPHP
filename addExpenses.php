@@ -1,4 +1,3 @@
-
 <?php
 
 session_start();
@@ -15,10 +14,16 @@ if(!isset($_SESSION['loginIn'])){
 
 
     $amount = $_POST['amount'];
+	
+	if($amount <= 0){
+		$successful_validation = false;
+		$_SESSION['e_validation'] = "Kwota wydatku nie może wynosić 0zł";
+	}
+	
 
     if ((!(preg_match('/^[0-9]{1,20}$/', $amount))) && (!(preg_match('/^[0-9]{1,20}+\.+[0-9]{1,2}$/', $amount))) && (!(preg_match('/^[0-9\+]{1,20}+\,+[0-9\+]{1,2}$/', $amount)))) {
       $successful_validation = false;
-      $_SESSION['e_amount'] = "Niepoprawny format kwoty!";
+      $_SESSION['e_validation'] = "Niepoprawny format kwoty!";
     }
     else {
       if (preg_match('/^[0-9]{1,20}+\,+[0-9]{1,2}$/', $amount)) {
@@ -31,7 +36,7 @@ if(!isset($_SESSION['loginIn'])){
 
     if(!(preg_match('/^[0-9]{4}+\-+[0-9]{1,2}+\-+[0-9]{1,2}$/', $date))) {
       $successful_validation = false;
-      $_SESSION['e_date'] = "Data musi być w formacie: RRRR-MM-DD";
+      $_SESSION['e_validation'] = "Data musi być w formacie: RRRR-MM-DD";
     }
     else {
       $year = substr($date, 0, 4);
@@ -40,8 +45,13 @@ if(!isset($_SESSION['loginIn'])){
       
       if(!checkdate($month, $day, $year)) {
         $successful_validation = false;
-        $_SESSION['e_date'] = "Niepoprawna data!";
+        $_SESSION['e_validation'] = "Niepoprawna data!";
       }
+	  
+	  if($year < 2001) {
+		$successful_validation = false;
+		$_SESSION['e_validation'] = "Data nie może być wcześniejsza jak 2001 rok!";
+	  }	  
       else {
         $currentdate = date('Y-m-d');
         $currentyear = substr($currentdate, 0, 4);
@@ -50,17 +60,17 @@ if(!isset($_SESSION['loginIn'])){
       
         if($year > $currentyear) {
           $successful_validation = false;
-          $_SESSION['e_date'] = "Data nie może być z przyszłości!";
+          $_SESSION['e_validation'] = "Data nie może być z przyszłości!";
         }
         elseif($year == $currentyear) {
           if($month > $currentmonth) {
             $successful_validation = false;
-            $_SESSION['e_date'] = "Data nie może być z przyszłości!";
+            $_SESSION['e_validation'] = "Data nie może być z przyszłości!";
           }
           elseif($month = $currentmonth) {
             if($day > $currentday) {
               $successful_validation = false;
-              $_SESSION['e_date'] = "Data nie może być z przyszłości!";
+              $_SESSION['e_validation'] = "Data nie może być z przyszłości!";
             }
           }
         }
@@ -123,6 +133,7 @@ if(!isset($_SESSION['loginIn'])){
 	<title>Budżet personalny</title>
 	<meta name="description" content="Strona pozwoli Ci obliczyć przychody oraz wydatki." />
 	<meta name="keywords" content="budżet personalny, przychody, wydatki" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link rel="stylesheet" href="style.css?v=<?php echo time(); ?>">	
 	
@@ -140,21 +151,27 @@ if(!isset($_SESSION['loginIn'])){
 	
 	<article>
 	
-		<div class="container-fluid">
-	
-			<div class="row text-center">
+		<div class="container">
 			
-				<div class="col-sm-12 addBalanceForm">
+			<div class="row justify-content-md-center mt-3">
+			
+				<div class="col-sm-10 col-md-6 col-lg-5 text-center formstyle">
 					
 					<h2>DODAJ WYDATEK</h2>
 					
 					<form method="post">
 					
-						<div><label> Kwota <input class="textfield form-control" type="number" step="0.01" value="0.00" name="amount" required></label></div>
+					  <div class="form-group mt-4 right-text-styling w-75 mx-auto">
+						<label for="inputAmount">Kwota</label>
+						<input type="number" class="form-control" id="inputAmount" step="0.01" value="0.00" name="amount" required>
+					  </div>
 						
-						<div><label> Data <input id="theDate" class="textfield form-control" type="date" name="date" required></label></div>
+					  <div class="form-group mb-3 mt-2 right-text-styling w-75 mx-auto">
+						<label for="theDate">Data</label>
+						<input type="date" class="form-control" id="theDate" name="date" required>
+					  </div>
 						 
-							<div class="category">
+							<div class="category border border-white right-text-styling w-75 mx-auto">
 							
 							Sposób płatności:
 								<div class="formCategory"><label><input class="form-check-input" type="radio" name="payment" value="1" checked> Gotówka </label></div>
@@ -166,7 +183,8 @@ if(!isset($_SESSION['loginIn'])){
 							</div>
 						
 							<div class="category">
-								<div><label>Kategoria<select name="category" class="form-select mt-1 mb-1">
+								<div class="form-group mb-3 mt-2 right-text-styling w-75 mx-auto">
+								<label>Kategoria:<select name="category" class="form-select mt-1 mb-1 ">
 								<option value="1" selected>Jedzenie</option>
 								<option value="2" >Mieszkanie</option>
 								<option value="3" >Transport</option>
@@ -184,13 +202,16 @@ if(!isset($_SESSION['loginIn'])){
 								<option value="15" >Spłata długów</option>
 								<option value="16" >Darowizna</option>
 								<option value="17" >Inne wydatki</option>
-								</select></label></div>
+								</select></label>
+								</div>
 								
 							</div>
 						
 						<div class="category">
 							
-							<div><label><textarea class="form-control" id="comment" name="comment" rows="3" cols="25" placeholder="Komentarz (opcjonalnie)"></textarea></label></div>
+							<div class="form-group">
+							<textarea class="form-control right-text-styling w-75 mx-auto" id="comment" rows="3" cols="25" name="comment" placeholder="Komentarz (opcjonalnie)"></textarea>
+							</div>
 							
 						</div>
 						
@@ -206,17 +227,22 @@ if(!isset($_SESSION['loginIn'])){
 						echo '<div class="comunity" style="color:#00e617; text-shadow: 2px 2px 4px black; font-size:18px; margin-left:auto; margin-right:auto; margin-top: 20px;">'.$_SESSION['comunity'].'</div>';
 						unset($_SESSION['comunity']);
 					}
-					if (isset($_SESSION['e_date']))
+					if (isset($_SESSION['e_validation']))
 					{
-						echo '<div class="e_date" style="color:red; text-shadow: 2px 2px 4px black; font-size:18px; margin-left:auto; margin-right:auto; margin-top: 20px;">'.$_SESSION['e_date'].'</div>';
-						unset($_SESSION['e_date']);
+						echo '<div class="e_validation" style="color:red; text-shadow: 2px 2px 4px black; font-size:18px; margin-left:auto; margin-right:auto; margin-top: 20px;">'.$_SESSION['e_validation'].'</div>';
+						unset($_SESSION['e_validation']);
 					}
 					
-					if (isset($_SESSION['e_amount']))
+					if (isset($_SESSION['e_validation']))
 					{
-						echo '<div class="e_amount" style="color:red; text-shadow: 2px 2px 4px black; font-size:18px; margin-left:auto; margin-right:auto; margin-top: 20px;">'.$_SESSION['e_amount'].'</div>';
-						unset($_SESSION['e_amount']);
+						echo '<div class="e_validation" style="color:red; text-shadow: 2px 2px 4px black; font-size:18px; margin-left:auto; margin-right:auto; margin-top: 20px;">'.$_SESSION['e_validation'].'</div>';
+						unset($_SESSION['e_validation']);
 					}
+					if (isset($_SESSION['e_validation']))
+					{
+						echo '<div class="e_validation" style="color:red; text-shadow: 2px 2px 4px black; font-size:18px; margin-left:auto; margin-right:auto; margin-top: 30px;">'.$_SESSION['e_validation'].'</div>';
+						unset($_SESSION['e_validation']);
+					}					
 				?>		
 				</div>
 			</div>

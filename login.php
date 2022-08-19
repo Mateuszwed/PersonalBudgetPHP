@@ -1,5 +1,7 @@
-
 <?php
+
+ini_set('display_errors', 1); 
+error_reporting(E_ALL);
 
 	session_start();
 	
@@ -12,7 +14,7 @@
 	
 	require_once "connect.php";
 	
-	$connect = @new mysqli($host, $db_user, $db_password, $db_name);
+	$connect = new mysqli($host, $db_user, $db_password, $db_name);
 	
 	if($connect->connect_errno!=0){
 		
@@ -25,26 +27,27 @@
 		
 		$email = htmlentities($email, ENT_QUOTES, "UTF-8");
 		
-		if($rezultat = @$connect->query(sprintf("SELECT * FROM users WHERE email='%s'",
+		if($result = @$connect->query(sprintf("SELECT * FROM users WHERE email='%s'",
 		mysqli_real_escape_string($connect, $email))))
 		
 		{
 			
-			$ilu = $rezultat->num_rows;
-			if($ilu>0){
+			$how_many = $result->num_rows;
+			if($how_many>0){
 				
-				$wiersz = $rezultat->fetch_assoc();
+				$row = $result->fetch_assoc();
 				
-				if (password_verify($password, $wiersz['password']))
+				if (password_verify($password, $row['password']))
 				{
 				
 				$_SESSION['loginIn'] = true;
-				$_SESSION['id'] = $wiersz['id'];
-				$_SESSION['username'] = $wiersz['username'];
-				$_SESSION['password'] = $wiersz['password'];
+				$_SESSION['id'] = $row['id'];
+				$_SESSION['username'] = $row['username'];
+				$_SESSION['password'] = $row['password'];
 				
 				unset($_SESSION['loginError']);
-				$rezultat->free_result();
+				unset($_SESSION['accountSuccess']);
+				$result->free_result();
 				header('Location: mainMenu.php');
 				}
 				

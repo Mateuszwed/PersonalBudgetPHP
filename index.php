@@ -1,5 +1,8 @@
-
 <?php
+
+ini_set('display_errors', 1); 
+error_reporting(E_ALL);
+
 
 session_start();
 
@@ -20,10 +23,12 @@ session_start();
 	<title>Budżet personalny</title>
 	<meta name="description" content="Strona pozwoli Ci obliczyć swoje przychody oraz wydatki." />
 	<meta name="keywords" content="budżet personalny, przychody, wydatki" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link rel="stylesheet" href="style.css?v=<?php echo time(); ?>">	
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+
 	
 </head>
 
@@ -41,25 +46,28 @@ session_start();
 	
 	<article>
 	
-		<div class="container-fluid">
-	
-			<div class="row text-center">
+		<div class="container">
 			
-				<div class="col-sm-12 loginForm">
-				
+			<div class="row justify-content-md-center mt-3">
+				<div class="col-sm-10 col-md-6 col-lg-3 text-center formstyle">
+			
 					<h2>LOGOWANIE</h2>
 							
 					<form action="login.php" method="post">
 								
-						<div><label> E-mail <input class="textfield form-control" type="email" name="email" required></label></div>
+					  <div class="form-group mb-3 mt-4">
+						<label for="inputEmail">Adres email</label>
+						<input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" name="email" required>
+					  </div>
 								 
-						<div>
-							<label> Hasło <input class="passField form-control" type="password" id="password" name="password" required></label>
-							<i id="visibilityBtn"><span id="icon" class="material-symbols-outlined eyeStyle">visibility</span></i>
-						</div>
-
+					  <div class="form-group mb-3">
+						<label for="inputPassword">Hasło</label>
+						<input type="password" class="form-control" id="inputPassword" name="password" required>
+						<i id="visibilityBtn"><span id="icon" class="material-symbols-outlined eyeStyle mt-3">visibility</span></i>
+					  </div>
+														 
 								
-						<button type="submit" class="btn buttonbg mt-4">ZALOGUJ</button>
+						<button type="submit" class="btn buttonbg">ZALOGUJ</button>
 							
 						<div id="goToRegister">
 								Jeśli nie masz jeszcze konta <a href="register.php">Zarejestruj się</a>
@@ -67,13 +75,16 @@ session_start();
 				
 					</form>
 					<?php
-						if(isset($_SESSION['loginError']))
+						if(isset($_SESSION['loginError'])){
 						echo $_SESSION['loginError'];
+						}
+						elseif(isset($_SESSION['accountSuccess'])){
+						echo $_SESSION['accountSuccess'];
+						}
 					?>
-
 				</div>
 			</div>
-		</div>
+		
 	
 	</article>
 	
@@ -85,12 +96,11 @@ session_start();
 		</div>
 	
 	</footer>
-	
+	</div>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
 	
 	<script src="js/bootstrap.min.js"></script>
-	
 </body>
 
 	<script src="showHideLogin.js"></script>

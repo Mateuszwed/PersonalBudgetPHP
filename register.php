@@ -62,6 +62,8 @@
 					
 					if ($connect->query("INSERT INTO users VALUES (NULL, '$username', '$security_password', '$email')"))
 					{
+						$_SESSION['accountSuccess'] = '<div style="color:#00e617; text-shadow: 2px 2px 4px black; font-size:18px; margin-left:auto; margin-right:auto; margin-top:10px;">Twoje konto zostało utworzone, możesz teraz się zalogować!</div>';
+						unset($_SESSION['loginError']);
 						header('Location: index.php');
 					}
 					else
@@ -93,10 +95,12 @@
 	<title>Budżet personalny</title>
 	<meta name="description" content="Strona pozwoli Ci obliczyć swoje przychody oraz wydatki." />
 	<meta name="keywords" content="budżet personalny, przychody, wydatki" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link rel="stylesheet" href="style.css?v=<?php echo time(); ?>">	
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+	
 	
 	
 </head>
@@ -115,30 +119,35 @@
 	
 	<article>
 	
-		<div class="container-fluid">
-	
-			<div class="row text-center">
-
-				<div class="col-sm-12 registerForm">
-				
-					<h2>REJESTRACJA</h2>
+			<div class="container">
 					
-							
-						<form method="post">
-						
-							<div><label> Imię <input class="textfield form-control" type="text" name="username" required /></label></div>
+					<div class="row justify-content-md-center">
+						<div class="col-sm-10 col-md-6 col-lg-4 text-center formstyle">
+					
+							<h2>REJESTRACJA</h2>
 									
-							<div><label> E-mail <input class="textfield form-control" type="email" name="email" required /></label></div>
-							
-							<div>
-							<label> Hasło <input class="passField form-control" type="password" id="password" name="password1" required></label>
-							<i id="visibilityBtn"><span id="icon" class="material-symbols-outlined eyeStyle">visibility</span></i>
-							</div>
-							
-							<div>
-							<label> Powtórz hasło <input class="passField form-control" type="password" id="password2" name="password2" required></label>
-							<i id="visibilityBtn2"><span id="icon2" class="material-symbols-outlined eyeStyle">visibility</span></i>
-							</div>
+							<form method="post">
+										
+							  <div class="form-group mb-3 mt-4 right-text-styling w-75 mx-auto">
+								<label for="inputName">Imię</label>
+								<input type="text" class="form-control" id="inputName" name="name" required>
+							  </div>
+							  
+							  <div class="form-group mb-3 right-text-styling w-75 mx-auto">
+								<label for="inputEmail">Adres email</label>
+								<input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" name="email" required>
+							  </div>
+										 
+							  <div class="form-group mb-3 right-text-styling w-75 mx-auto">
+								<label for="inputPassword">Hasło</label>
+								<input type="password" class="form-control" id="inputPassword2" name="password1" required>
+							  </div>
+							  
+							  <div class="form-group mb-1 right-text-styling w-75 mx-auto">
+								<label for="inputPassword3">Powtórz hasło</label>
+								<input type="password" class="form-control" id="inputPassword3" name="password2" required>
+								<i id="visibilityBtn"><span id="icon" class="material-symbols-outlined eyeStyle mt-3">visibility</span></i>
+							  </div>
 									
 							<button type="submit" class="btn buttonbg mt-4">ZAŁÓŻ KONTO</button>
 							
@@ -154,7 +163,6 @@
 							?>		
 				</div>
 			</div>
-		</div>
 		
 	</article>
 	
@@ -165,6 +173,8 @@
 		</div>
 	
 	</footer>
+	
+	</div>
 	
 	
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>

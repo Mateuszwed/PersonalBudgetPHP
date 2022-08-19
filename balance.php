@@ -104,8 +104,10 @@ if(!isset($_SESSION['loginIn'])){
 	<title>Budżet personalny</title>
 	<meta name="description" content="Strona pozwoli Ci obliczyć przychody oraz wydatki." />
 	<meta name="keywords" content="budżet personalny, przychody, wydatki" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link rel="stylesheet" href="style.css?v=<?php echo time(); ?>">
+
 	
 	
 
@@ -126,29 +128,37 @@ if(!isset($_SESSION['loginIn'])){
 	
 	<article>
 	
-		<div class="container balanceForm">
-	
-			<div class="row">
+		<div class="container">
 			
+			<div class="row justify-content-md-center mt-3">
+			
+				<div class="col-sm-12 col-md-6 col-lg-12 text-center formstyle">
+				
 				<h2 style="text-align: center;">Bilans</h2>
 				
-			
-				
-					<div class="col-12 mb-5 mt-2" style="height: 50px;">
+						<div class="period navbar" >
+							<div class="p-2 float-start">
+								<a class="btn btn-primary btn-lg btn-block" href="balance.php?option=1">Bieżący miesiąc</a>
+							</div>
+							<div class="p-2 float-start">
+								<a class="btn btn-primary" href="balance.php?option=2">Poprzedni miesiąc</a>
+							</div>
+							<div class="p-2 float-start" >
+								<a class="btn btn-primary" href="balance.php?option=3">Bieżący rok</a>
+							</div>
+							<div class="p-2 float-start">
+								<a class="btn btn-primary" href="#myModal" data-bs-toggle="modal" >Niestandardowy</a>	
+							</div>
+							<div style="clear:both;"></div>
 
-					<div class="period">
-							<a href="balance.php?option=1">Bieżący miesiąc</a>
-							<a href="balance.php?option=2">Poprzedni miesiąc</a>
-							<a href="balance.php?option=3">Bieżący rok</a>
-							<a href="#myModal" data-bs-toggle="modal" >Niestandardowy</a>	
-					</div>
-					
-					</div>
+						</div>
+						
+			
 								
 					
 					<div style="clear:both;"></div>
 				
-						<div class="col-xl-6 text-center leftPanel">
+						<div class="col-12 col-lg-6 mt-3 text-center leftPanel">
 							<div>PRZYCHODY</div>
 							<table>
 							<tr>
@@ -180,8 +190,8 @@ if(!isset($_SESSION['loginIn'])){
 							?>
 						</div>
 					  
-						<div class="col-xl-6 text-center rightPanel">
-						<div>WYDATKI</div>
+						<div class="col-12 col-lg-6 mt-3 text-center rightPanel">
+							<div>WYDATKI</div>
 							<table>
 							<tr>
 								<th>Kategoria</th>
@@ -210,11 +220,13 @@ if(!isset($_SESSION['loginIn'])){
 						echo round($expenses_sum, 2). " zł";
 						?>
 						</div>
+						<div style="clear:both;"></div>
 						<div class="col-12">
 				
 							<a href="mainMenu.php" class="btn cancelButtonbg mt-2 mb-2">WRÓĆ</a>
 				
 						</div>
+	
 				<?php
 					if (isset($_SESSION['dateError']))
 					{
@@ -224,7 +236,7 @@ if(!isset($_SESSION['loginIn'])){
 					?>
 			</div>
 		</div>
-							<!--Modal-->
+	</div>
 							<div class="modal fade text-body" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 								<div class="modal-dialog" role="document">
 									<div class="modal-content">

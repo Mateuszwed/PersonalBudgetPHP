@@ -1,36 +1,22 @@
 const visibilityBtn = document.getElementById("visibilityBtn");
-const visibilityBtn2 = document.getElementById("visibilityBtn2");
 visibilityBtn.addEventListener("click", toggleVisibility);
-visibilityBtn2.addEventListener("click", toggleVisibility2);
 
 function toggleVisibility(){
 	
 	
-	const passwordInput = document.getElementById("password");
+	const passwordInput2 = document.getElementById("inputPassword2");
+	const passwordInput3 = document.getElementById("inputPassword3");
 	const icon = document.getElementById("icon");
-	if(passwordInput.type == "password") {
-		passwordInput.type = "text";
+	if(passwordInput2.type == "password") {
+		passwordInput2.type = "text";
+		passwordInput3.type = "text";
 		icon.innerText = "visibility_off";
 		
 	}else{
 		
-		passwordInput.type = "password";
+		passwordInput2.type = "password";
+		passwordInput3.type = "password"
 		icon.innerText = "visibility";
 	}
 }
 
-function toggleVisibility2(){
-	
-	
-	const passwordInput = document.getElementById("password2");
-	const icon = document.getElementById("icon2");
-	if(passwordInput.type == "password") {
-		passwordInput.type = "text";
-		icon.innerText = "visibility_off";
-		
-	}else{
-		
-		passwordInput.type = "password";
-		icon.innerText = "visibility";
-	}
-}

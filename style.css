@@ -45,90 +45,6 @@ h2{
 }
 
 
-.loginForm{
-	
-	height: 500px;
-    width: 400px;
-    background-color: rgba(255,255,255,0.13);
-	margin-top: 80px;
-    margin-right: auto;
-    margin-left: auto;
-    border-radius: 10px;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 0 40px rgba(8,7,16,0.6);
-    padding: 50px 35px;
-	font-weight: bold;
-	
-	
-}
-
-
-.registerForm{
-	
-	height: 550px;
-    width: 400px;
-    background-color: rgba(255,255,255,0.13);
-	margin-top: 80px;
-    margin-right: auto;
-    margin-left: auto;
-    border-radius: 10px;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 0 40px rgba(8,7,16,0.6);
-    padding: 50px 35px;
-	font-weight: bold;
-	
-	
-}
-
-
-.addBalanceForm{
-	
-	height: 700px;
-    width: 400px;
-    background-color: rgba(255,255,255,0.13);
-	margin-top: -10px;
-    margin-right: auto;
-    margin-left: auto;
-    border-radius: 10px;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 0 40px rgba(8,7,16,0.6);
-    padding: 30px 35px;
-	font-weight: bold;
-	
-	
-}
-
-
-.balanceForm{
-	
-	width: 100%;
-    background-color: rgba(255,255,255,0.13);
-    margin-right: auto;
-    margin-left: auto;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 0 40px rgba(8,7,16,0.6);
-	
-	
-}
-
-
-.mainMenu{
-	
-	height: 500px;
-    width: 400px;
-    background-color: rgba(255,255,255,0.13);
-	margin-top: 80px;
-    margin-right: auto;
-    margin-left: auto;
-    border-radius: 10px;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 0 40px rgba(8,7,16,0.6);
-    padding: 50px 35px;
-	font-weight: bold;
-	
-	
-}
-
 
 .buttonbg{
 	
@@ -163,21 +79,17 @@ h2{
 
 
 .period{
-	
 	margin-bottom: 20px;
-	text-align: center;
+	padding: 0 100px;
 	
 
 }
 
 .period a{
-	
+	padding: 10px 30px;
     background-color: #067e96;
     color: white;
-    padding: 10px 20px;
-    text-align: center;
     text-decoration: none;
-    display: inline-block;
 
 }
 
@@ -259,27 +171,12 @@ h2{
 }
 
 
-.textfield{
-	
-	margin-top: 4px;
-	width: 300px;
-	font-size: 20px;
-	margin-bottom: 5px;
-}
-
-
 .formCategory{
 	
 	margin-top: 5px;
 	margin-bottom: 8px;
 }
 
-
-textarea{
-	
-	resize: none;
-	
-}
 
 
 .category{
@@ -290,8 +187,8 @@ textarea{
 
 .option > .buttonbg{
 	
-	width: 250px;
-	height: 50px;
+	width: 80%;
+	height: 50%;
 	line-height: 35px;
 }
 
@@ -315,8 +212,16 @@ textarea{
 }
 
 
-table, th, td{
-	width: 600px;
+table{
+	width: 100%;
+	border: 1px solid black;
+	font-size: 16px;
+	background-color: #ffffff;
+	color: black;
+}
+
+ th, td{
+	width: 50%;
 	border: 1px solid black;
 	font-size: 16px;
 	background-color: #ffffff;
@@ -324,40 +229,12 @@ table, th, td{
 }
 
 
-@media (max-height: 1200px){
-
-	.info{
-		
-		margin-top: 50px;
-		
-	}
-	
-}
-
-@media (max-width: 1400px){
-	
-	table, th, td{
-	width: 500px;
-	}
-	
-}
-
-
-@media (max-width: 1200px){
-	
-	
-	table, th, td{
-	width: 400px;
-	}
-	
-}
 	
 
 
 .eyeStyle{
 	height: 40px;
-	width: 40px;
-	font-size: 28px;
+	width: 20%;
 	color: #white;
 	cursor: pointer;
 	background-color: gray;
@@ -386,3 +263,11 @@ i{
 	
 }
 
+.formstyle{
+	
+	background-color: rgba(255,255,255,0.13);
+	backdrop-filter: blur(10px);
+	border-radius: 5px;
+    box-shadow: 0 0 40px rgba(8,7,16,0.6);
+	padding: 20px;
+}

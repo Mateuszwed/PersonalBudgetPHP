@@ -5,15 +5,15 @@ visibilityBtn.addEventListener("click", toggleVisibility);
 function toggleVisibility(){
 	
 	
-	const passwordInput = document.getElementById("password");
+	const inputPassword = document.getElementById("inputPassword");
 	const icon = document.getElementById("icon");
-	if(passwordInput.type == "password") {
-		passwordInput.type = "text";
+	if(inputPassword.type == "password") {
+		inputPassword.type = "text";
 		icon.innerText = "visibility_off";
 		
 	}else{
 		
-		passwordInput.type = "password";
+		inputPassword.type = "password";
 		icon.innerText = "visibility";
 	}
 }

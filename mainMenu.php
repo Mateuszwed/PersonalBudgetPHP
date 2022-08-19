@@ -1,4 +1,3 @@
-
 <?php
 
 session_start();
@@ -20,8 +19,10 @@ if(!isset($_SESSION['loginIn'])){
 	<title>Budżet personalny</title>
 	<meta name="description" content="Strona pozwoli Ci obliczyć przychody oraz wydatki." />
 	<meta name="keywords" content="budżet personalny, przychody, wydatki" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="css/bootstrap.min.css">
-	<link rel="stylesheet" href="style.css?v=<?php echo time(); ?>">	
+	<link rel="stylesheet" href="style.css?v=<?php echo time(); ?>">
+
 	
 </head>
 
@@ -37,45 +38,47 @@ if(!isset($_SESSION['loginIn'])){
 	
 	<article>
 	
-		<div id="container-fluid">
+		<div class="container">
 	
-			<div class="row mainMenu text-center">
-			
-				<h2>MENU GŁÓWNE</h2>
+				<div class="row justify-content-md-center mt-5">
 				
+					<div class="col col-md-6 col-lg-3 text-center formstyle p-3">
+			
+						<h2>MENU</h2>
+						
 
-				 <div class="option">
-				 <a href="addIncomes.php" class="btn buttonbg mt-2">Dodaj przychód</a>
-				 </div>
-				 
-				 <div class="option">
-				 <a href="addExpenses.php" class="btn buttonbg mt-2">Dodaj wydatek</a>
-				 </div>
-				 
-				 <div class="option">
-				 <a href="balance.php" class="btn buttonbg mt-2">Przeglądaj bilans</a>
-				 </div>
-				 
-				 <div class="option">
-				 <a href="#" class="btn buttonbg mt-2">Ustawienia</a>
-				 </div>
-				 
-				 <div class="optionLogout">
-				 <a href="logout.php" class="btn buttonbg mt-2">Wyloguj</a>
-				 </div>
+						 <div class="option mb-2">
+						 <a href="addIncomes.php" class="btn buttonbg mt-2">Dodaj przychód</a>
+						 </div>
+						 
+						 <div class="option mb-2">
+						 <a href="addExpenses.php" class="btn buttonbg mt-2">Dodaj wydatek</a>
+						 </div>
+						 
+						 <div class="option mb-2">
+						 <a href="balance.php" class="btn buttonbg mt-2">Przeglądaj bilans</a>
+						 </div>
+						 
+						 <div class="option mb-2">
+						 <a href="#" class="btn buttonbg mt-2">Ustawienia</a>
+						 </div>
+						 
+						 <div class="optionLogout">
+						 <a href="logout.php" class="btn buttonbg mt-2">Wyloguj</a>
+						 </div>
 	
+					</div>
+				</div>
 			</div>
-		</div>
-	
 	</article>
 
-	<footer class="mt-auto">
-	
-		<div class="text-center p-3 info" style="background-color: rgba(0, 0, 0, 0.2);">
-			© 2022 Wszelkie prawa zastrzeżone</a>
-		</div>
-	
-	</footer>
+		<footer class="mt-auto">
+		
+			<div class="text-center p-3 info" style="background-color: rgba(0, 0, 0, 0.2);">
+				© 2022 Wszelkie prawa zastrzeżone</a>
+			</div>
+		
+		</footer>
 	
 
 
